@@ -1,0 +1,16 @@
+<h1><%= params.fetch("setting").capitalize!%></h1>
+<div>Some detective prompt</div>
+
+  <form action="/submit_form" method="post">
+    <div>
+    <label for="question_one">Do you want to examine a place or interrogate a suspect?</label>
+    <select id="question_one" name="action">
+      <option value="examine">Examine!</option>
+      <option value="interrogate">Interrogate!</option>
+    </select>
+    <input type="submit" value="select">
+    </div>
+    </form>
+
+    <%=@selected_option%>
+hehe
