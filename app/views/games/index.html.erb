@@ -1,0 +1,111 @@
+<h1>AIgatha</h1>
+<h2><i>Create and solve a detective puzzle game using AI</i><h2>
+<h3>Customize your game</h3>
+<div>
+  <form action="/insert_game" method="post">
+    <div>
+    <label for="title">Title:</label>
+    <input id="title" name="query_title">
+    <br>
+
+    <label for="setting">Choose your setting:</label>
+    <select id="setting" name="query_setting">
+      <option value="old mansion">old mansion</option>
+      <option value="spaceship">spaceship</option>
+      <option value="art museum">art museum</option>
+      <option value="random">surprise me!</option>
+    </select>
+    </div>
+
+    <div>
+    <label for="difficulty">Choose your difficulty:</label>
+    <select id="difficulty" name="query_difficulty">
+      <option value="easy">easy</option>
+      <option value="medium">medium</option>
+      <option value="hard">hard</option>
+    </select>
+    </div>
+    <input type="submit" value="Investigate!">
+  </form>
+</div>
+
+<%=current_user.id%>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Author
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Setting
+        </th>
+
+        <th>
+          Difficulty
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_games.each do |a_game| %>
+      <tr>
+        <td>
+          <%= a_game.id %>
+        </td>
+
+        <td>
+          <%= a_game.author_id %>
+        </td>
+
+        <td>
+          <%= a_game.title %>
+        </td>
+
+        <td>
+          <%= a_game.setting %>
+        </td>
+
+        <td>
+          <%= a_game.difficulty %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_game.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_game.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/games/<%= a_game.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
