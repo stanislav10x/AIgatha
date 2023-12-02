@@ -19,12 +19,6 @@
     </div>
 
     <dl>
-      <dt>
-        Author
-      </dt>
-      <dd>
-        <%= @the_game.author_id %>
-      </dd>
 
       <dt>
         Title
@@ -54,12 +48,6 @@
         <%= time_ago_in_words(@the_game.created_at) %> ago
       </dd>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_game.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
@@ -113,11 +101,11 @@
           Body
         </label>
 
-        <textarea id="body_box" name="query_body" rows="3"></textarea>
+        <textarea class="form-control" id="body_box" name="query_body" rows="3"></textarea>
       </div>
 
       <button>
-        Create post
+        Go!
       </button>
     </form>
   </div>
