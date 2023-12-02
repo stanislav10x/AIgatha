@@ -66,17 +66,106 @@
 
 <hr>
 
-<div><b> Narrator:[Some detective prompt]</b></div>
 
-  <form action="/submit_form" method="post">
-    <div>
-    <label for="question_one">Do you want to examine a place or interrogate a suspect?</label>
-    <select id="question_one" name="action">
-      <option value="examine">Examine!</option>
-      <option value="interrogate">Interrogate!</option>
-    </select>
-    <input type="submit" value="select">
-    </div>
+
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Game
+        </th>
+
+        <th>
+          Gpt created
+        </th>
+
+        <th>
+          Body
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_posts.each do |a_post| %>
+      <tr>
+        <td>
+          <%= a_post.id %>
+        </td>
+
+        <td>
+          <%= a_post.game_id %>
+        </td>
+
+        <td>
+          <%= a_post.gpt_created %>
+        </td>
+
+        <td>
+          <%= a_post.body %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_post.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_post.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/posts/<%= a_post.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h3>
+      What place do you want to examine or whom do you want to interrogate?
+    </h3>
+
+    <form action="/<%= @the_game.id %>/insert_post" method="post">
+
+      <div>
+        <input type="checkbox" id="gpt_created_box" name="query_gpt_created" value="1">
+
+        <label for="gpt_created_box">Gpt created</label>
+      </div>
+
+      <div>
+        <label for="body_box">
+          Body
+        </label>
+
+        <textarea id="body_box" name="query_body" rows="3"></textarea>
+      </div>
+
+      <button>
+        Create post
+      </button>
     </form>
+  </div>
+</div>
 
-    <%=@selected_option%>
+<hr>

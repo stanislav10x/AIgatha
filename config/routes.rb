@@ -2,16 +2,14 @@ Rails.application.routes.draw do
   # Routes for the Post resource:
 
   # CREATE
-  post("/insert_post", { :controller => "posts", :action => "create" })
+  post("/:game_id_path/insert_post", { :controller => "posts", :action => "create" })
           
   # READ
   get("/posts", { :controller => "posts", :action => "index" })
-  
-  get("/posts/:path_id", { :controller => "posts", :action => "show" })
-  
+    
   # UPDATE
   
-  post("/modify_post/:path_id", { :controller => "posts", :action => "update" })
+  #post("/modify_post/:path_id", { :controller => "posts", :action => "update" })
   
   # DELETE
   get("/delete_post/:path_id", { :controller => "posts", :action => "destroy" })
@@ -39,7 +37,5 @@ Rails.application.routes.draw do
 
   #------------------------------
 
-  get("/", {:controller => "game", :action => "inputs"})
-  get("/games/:game_id", {:controller => "game", :action => "new_game"})
-  post("/submit_form", {:controller => "game", :action => "question_one"})
+  get("/", { :controller => "games", :action => "index" })
 end
