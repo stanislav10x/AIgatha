@@ -66,51 +66,17 @@
 
 <hr>
 
+<div><b> Narrator:[Some detective prompt]</b></div>
 
-<div>
-  <div>
-    <h2>
-      Edit game
-    </h2>
-
-    <form action="/modify_game/<%= @the_game.id %>"  method="post" >
-      <div>
-        <label for="author_id_box">
-          Author
-        </label>
-
-        <input type="text" id="author_id_box" name="query_author_id" value="<%= @the_game.author_id %>">
-      </div>
-
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title" value="<%= @the_game.title %>">
-      </div>
-
-      <div>
-        <label for="setting_box">
-          Setting
-        </label>
-
-        <input type="text" id="setting_box" name="query_setting" value="<%= @the_game.setting %>">
-      </div>
-
-      <div>
-        <label for="difficulty_box">
-          Difficulty
-        </label>
-
-        <input type="text" id="difficulty_box" name="query_difficulty" value="<%= @the_game.difficulty %>">
-      </div>
-
-      <button>
-        Update game
-      </button>
+  <form action="/submit_form" method="post">
+    <div>
+    <label for="question_one">Do you want to examine a place or interrogate a suspect?</label>
+    <select id="question_one" name="action">
+      <option value="examine">Examine!</option>
+      <option value="interrogate">Interrogate!</option>
+    </select>
+    <input type="submit" value="select">
+    </div>
     </form>
-  </div>
-</div>
 
-<hr>
+    <%=@selected_option%>

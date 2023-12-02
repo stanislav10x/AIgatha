@@ -32,23 +32,6 @@ class GamesController < ApplicationController
     end
   end
 
-  def update
-    the_id = params.fetch("path_id")
-    the_game = Game.where({ :id => the_id }).at(0)
-
-    the_game.author_id = params.fetch("query_author_id")
-    the_game.title = params.fetch("query_title")
-    the_game.setting = params.fetch("query_setting")
-    the_game.difficulty = params.fetch("query_difficulty")
-
-    if the_game.valid?
-      the_game.save
-      redirect_to("/games/#{the_game.id}", { :notice => "Game updated successfully."} )
-    else
-      redirect_to("/games/#{the_game.id}", { :alert => the_game.errors.full_messages.to_sentence })
-    end
-  end
-
   def destroy
     the_id = params.fetch("path_id")
     the_game = Game.where({ :id => the_id }).at(0)
