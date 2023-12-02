@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
+
   def index
-    matching_games = Game.all
+    matching_games = Game.all.where(:author_id => current_user.id)
 
     @list_of_games = matching_games.order({ :created_at => :desc })
 
