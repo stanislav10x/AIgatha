@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post("/:game_id_path/insert_post", { :controller => "posts", :action => "create" })
           
   # READ
-  get("/posts", { :controller => "posts", :action => "index" })
+  #get("/posts", { :controller => "posts", :action => "index" })
     
   # UPDATE
   
