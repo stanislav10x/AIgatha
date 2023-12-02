@@ -1,11 +1,4 @@
 class PostsController < ApplicationController
-  def index
-    matching_posts = Post.all
-
-    @list_of_posts = matching_posts.order({ :created_at => :desc })
-
-    render({ :template => "posts/index" })
-  end
 
 
   def create

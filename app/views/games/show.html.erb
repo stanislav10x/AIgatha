@@ -68,76 +68,31 @@
 
 
 
-
 <div>
   <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Game
-        </th>
-
-        <th>
-          Gpt created
-        </th>
-
-        <th>
-          Body
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
+  <dl>
       <% @list_of_posts.each do |a_post| %>
-      <tr>
-        <td>
-          <%= a_post.id %>
-        </td>
+        <div>
+          <dt>
+          <% if a_post.gpt_created==true %>
+            Narrator:
+          <% else %>
+            <%= User.where(:id => @the_game.author_id).first.email %>
+          <% end %>
+          </dt>
+        </div>
 
-        <td>
-          <%= a_post.game_id %>
-        </td>
-
-        <td>
-          <%= a_post.gpt_created %>
-        </td>
-
-        <td>
+        <div>
+          <dd>
           <%= a_post.body %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_post.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_post.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/posts/<%= a_post.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+          </dd>
+        </div>
+        <br><hr>
       <% end %>
-    </table>
+  </dl>
   </div>
 </div>
 
-<hr>
 
 <div>
   <div>

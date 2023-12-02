@@ -14,7 +14,7 @@ class GamesController < ApplicationController
 
     @the_game = matching_games.at(0)
 
-    matching_posts = Post.all
+    matching_posts = Post.all.where(:game_id => @the_game.id)
 
     @list_of_posts = matching_posts.order({ :created_at => :asc })
 
