@@ -77,7 +77,7 @@
           <% if a_post.gpt_created==true %>
             Narrator:
           <% else %>
-            <%= User.where(:id => @the_game.author_id).first.username %>
+            <%= User.where(:id => @the_game.author_id).first.email %>
           <% end %>
           </dt>
         </div>

@@ -1,5 +1,5 @@
 <h1>AIgatha</h1>
-<h2><i>Create and solve a detective puzzle game using AI</i><h2>
+<h2><i>Create and solve detective puzzle games using AI</i><h2>
 <h3>Customize your game</h3>
 <div>
   <form action="/insert_game" method="post">
@@ -59,7 +59,7 @@
         </th>
 
         <th>
-          Updated at
+          Number of queries
         </th>
 
         <th>
@@ -91,8 +91,9 @@
         <td>
           <%= time_ago_in_words(a_game.created_at) %> ago
         </td>
+
         <td>
-          <%= time_ago_in_words(a_game.updated_at) %> ago
+          <%= Post.where(:game_id => a_game.id).where(:gpt_created => false).count %>
         </td>
 
         <td>
@@ -107,4 +108,3 @@
 </div>
 
 <hr>
-

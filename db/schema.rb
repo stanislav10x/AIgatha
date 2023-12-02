@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_02_134924) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_02_164507) do
   create_table "games", force: :cascade do |t|
     t.integer "author_id"
     t.string "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_134924) do
     t.string "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_of_queries"
   end
 
   create_table "posts", force: :cascade do |t|
