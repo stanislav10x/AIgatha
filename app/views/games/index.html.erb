@@ -32,40 +32,43 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table">
+      <thead>
       <tr>
-        <th>
+        <th scope="col">
           ID
         </th>
 
-        <th>
+        <th scope="col">
           Author
         </th>
 
-        <th>
+        <th scope="col">
           Title
         </th>
 
-        <th>
+        <th scope="col">
           Setting
         </th>
 
-        <th>
+        <th scope="col">
           Difficulty
         </th>
 
-        <th>
+        <th scope="col">
           Created at
         </th>
 
-        <th>
+        <th scope="col">
           Number of queries
         </th>
 
-        <th>
+        <th scope="col">
         </th>
       </tr>
+      </thead>
 
+      <tbody>
       <% @list_of_games.each do |a_game| %>
       <tr>
         <td>
