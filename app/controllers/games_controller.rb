@@ -15,9 +15,19 @@ class GamesController < ApplicationController
 
     @the_game = matching_games.at(0)
 
-    matching_posts = Post.all.where(:game_id => @the_game.id)
+    matching_posts = Post.all.where(:game_id => @the_game.id).offset(0) # change to 1 when the time is right
 
     @list_of_posts = matching_posts.order({ :created_at => :asc })
+
+   #client = OpenAI::Client.new
+    #@response = client.chat(
+     # parameters: {
+      #  model: "gpt-3.5-turbo",
+      #  messages: [{ role: "user", content: "Hello!"}],
+      #  temperature: 0.7,
+      #},
+    #)
+     # response.fetch("choices").at(0).fetch("message").fetch("content")
 
     render({ :template => "games/show" })
   end
@@ -31,6 +41,15 @@ class GamesController < ApplicationController
 
     if the_game.valid?
       the_game.save
+
+      #add the first API post
+
+      prompt = Post.new
+      prompt.game_id = the_game.id
+      prompt.gpt_created = true
+      prompt.body = "Tell me a joke" # insert prompt here
+      prompt.save
+
       redirect_to("/games/#{the_game.id}", { :notice => "Game created successfully." })
     else
       redirect_to("/games", { :alert => the_game.errors.full_messages.to_sentence })
@@ -40,7 +59,9 @@ class GamesController < ApplicationController
   def destroy
     the_id = params.fetch("path_id")
     the_game = Game.where({ :id => the_id }).at(0)
+    the_posts = Post.where({:game_id => the_id})
 
+    the_posts.destroy_all
     the_game.destroy
 
     redirect_to("/games", { :notice => "Game deleted successfully."} )

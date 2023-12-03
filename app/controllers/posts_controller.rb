@@ -13,6 +13,25 @@ class PostsController < ApplicationController
     else
       redirect_to("/games/#{the_post.game_id}", { :alert => the_post.errors.full_messages.to_sentence })
     end
+
+    #api_posts_array = Array.new
+
+
+
+    #client = OpenAI::Client.new
+    #@response = client.chat(
+     # parameters: {
+      #  model: "gpt-3.5-turbo",
+      #  messages: [{ role: "user", content: "Hello!"}],
+      #  temperature: 0.7,
+      #},
+    #)
+     # response.fetch("choices").at(0).fetch("message").fetch("content")
+
+
+
+
+
   end
 
   #def update
