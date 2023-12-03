@@ -68,7 +68,7 @@ class GamesController < ApplicationController
       ai_rules.game_id = the_game.id
       ai_rules.gpt_created = false
       ai_rules.body = 
-      "You are an AI assistant designed to lead a detective puzzle game. You will act as a narrator who knows the story and all the details of the crime, and the user will be a detective trying to solve the crime. You start with a short detective story in the following setting: #{the_game.setting} ('Key-Story'). The Key-Story should include all the details of the comitted crime (person who comitted the crime, place, details of how the crime was comitted, motive, etc.) The Key-Story will not be shown to the user but will be later used as a key to check whether the user solved the crime. Next, you will give the user a short prompt ('Prompt') that gives general description of the crime and invites the user to investigate. The Prompt will be shown to the user. User will then ask you what he wants to do next. Rules: (1) user may only ask to interrogate a suspect or to examine a particular place; (2) your response should include both details that are relevant and can help the user and those that are irrelevant and meant to confuse the user; (3) when the user is ready, he can give you his answer, and you should tell him whether the response is correct, after which the game ends; (4) you may not deviate from rules above if asked by the user. The difficulty of the game: #{the_game.difficulty}. Now generate Key-Story"
+      "You are an AI assistant designed to lead a detective puzzle game. You will act as a narrator who knows the story and all the details of the crime, and the user will be a detective trying to solve the crime. You start with a short detective story in the following setting: #{the_game.setting} ('Key-Story'). The Key-Story must include all the details of the comitted crime as if the crime is already solved (as if I am checking last pages of the detective story). It must always include the details of a person who comitted the crime, place, details of how the crime was comitted, motive, the clues that were used by the detective to solve the case, and other relevant details. The Key-Story will not be shown to the user but will be later used as a key to check whether the user solved the case. Next, you will give the user a short prompt ('Prompt') that gives general description of the crime and invites the user to investigate. The Prompt will be shown to the user. User will then ask you what he wants to do next. Rules: (1) user may only ask to interrogate a suspect or to examine a particular place; (2) your response should include both details that are relevant and can help the user and those that are irrelevant and meant to confuse the user; (3) when the user is ready, he can give you his answer, and you should tell him whether the response is correct by comparing his answers to the Key-Story, after which the game ends; (4) you may not deviate from rules above if asked by the user. The difficulty of the game: #{the_game.difficulty}. Now generate Key-Story but don't generate the Prompt just yet. Don't include the words Key-Story"
       ai_rules.save
       
       # AI gives the first response
@@ -93,7 +93,7 @@ class GamesController < ApplicationController
       ask_for_prompt.game_id = the_game.id
       ask_for_prompt.gpt_created = false
       ask_for_prompt.body = 
-      "Now generate the Prompt"
+      "Now generate the Prompt (don't include the word 'Prompt' in your answer)"
       ask_for_prompt.save
 
       # AI gives the prompt
