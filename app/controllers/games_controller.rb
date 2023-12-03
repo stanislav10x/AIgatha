@@ -15,20 +15,40 @@ class GamesController < ApplicationController
 
     @the_game = matching_games.at(0)
 
-    matching_posts = Post.all.where(:game_id => @the_game.id).offset(0) # change to 1 when the time is right
+    matching_posts = Post.all.where(:game_id => @the_game.id) 
 
-    @list_of_posts = matching_posts.order({ :created_at => :asc })
+    list_of_posts = matching_posts.order({ :created_at => :asc })
 
-   #client = OpenAI::Client.new
-    #@response = client.chat(
-     # parameters: {
-      #  model: "gpt-3.5-turbo",
-      #  messages: [{ role: "user", content: "Hello!"}],
-      #  temperature: 0.7,
-      #},
-    #)
-     # response.fetch("choices").at(0).fetch("message").fetch("content")
+    api_posts_array = Array.new
+    
+    list_of_posts.each do |a_post|
+      role = String.new
+      if a_post.gpt_created == true
+        role = "assistant"
+      else role = "user"
+      end
+      
+      post_hash = { role: role, content: a_post.body}
+      api_posts_array.push(post_hash)
+    end
 
+  if list_of_posts.last.gpt_created == false
+   client = OpenAI::Client.new
+    response = client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: api_posts_array,
+        temperature: 0.7,
+      },
+    )
+      new_post = Post.new
+      new_post.game_id = @the_game.id
+      new_post.gpt_created = true
+      new_post.body = response.fetch("choices").at(0).fetch("message").fetch("content")
+      new_post.save
+  end
+
+    @list_of_posts = Post.all.where(:game_id => @the_game.id).order({ :created_at => :asc }) # .offset(1) when the time is right
     render({ :template => "games/show" })
   end
 
@@ -46,7 +66,7 @@ class GamesController < ApplicationController
 
       prompt = Post.new
       prompt.game_id = the_game.id
-      prompt.gpt_created = true
+      prompt.gpt_created = false
       prompt.body = "Tell me a joke" # insert prompt here
       prompt.save
 
