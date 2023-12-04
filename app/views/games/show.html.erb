@@ -8,7 +8,7 @@
 <div>
   <div>
     <h1>
-      Game #<%= @the_game.id %> details
+      <%= @the_game.title %>
     </h1>
 
     <div>
@@ -48,19 +48,11 @@
         <%= @the_game.difficulty %>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_game.created_at) %> ago
-      </dd>
-
     </dl>
   </div>
 </div>
 
-<hr>
-
+<hr class="border border-primary border-3 opacity-50">
 
 
 <div>
@@ -92,26 +84,19 @@
 <div>
   <div>
     <h3>
-      What place do you want to examine or whom do you want to interrogate?
+      What do you want to examine or whom do you want to interrogate?
     </h3>
 
     <form action="/<%= @the_game.id %>/insert_post" method="post">
 
       <div>
-        <input type="checkbox" id="gpt_created_box" name="query_gpt_created" value="1">
-
-        <label for="gpt_created_box">Gpt created</label>
-      </div>
-
-      <div>
         <label for="body_box">
-          Body
         </label>
 
         <textarea class="form-control" id="body_box" name="query_body" rows="3"></textarea>
       </div>
 
-      <button>
+      <button type="button" class="btn btn-primary">
         Go!
       </button>
     </form>

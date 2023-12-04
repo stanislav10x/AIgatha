@@ -3,47 +3,45 @@
 <br>
 
 <h4>Customize your game</h4>
+  <div class="mb-3">
+    <form action="/insert_game" method="post">
+      <div>
+      <label for="title" class="form-label">Title:</label>
+      <input id="title" class="form-control" name="query_title">
+      <br>
+      </div>
+
+      <div>
+      <label for="setting" class="form-label">Choose your setting:</label>
+      <select id="setting" name="query_setting" class="form-select">
+        <option value="old mansion">old mansion</option>
+        <option value="spaceship">spaceship</option>
+        <option value="art museum">art museum</option>
+        <option value="random">surprise me!</option>
+      </select>
+      <br>
+      </div>
+
+      <div>
+      <label for="difficulty" class="form-label">Choose your difficulty:</label>
+      <select id="difficulty" name="query_difficulty" class="form-select">
+        <option value="easy">easy</option>
+        <option value="medium">medium</option>
+        <option value="hard">hard</option>
+      </select>
+      <br>
+      </div>
+      <input type="submit" value="Investigate!" type="button" class="btn btn-primary">
+    </form>
+  </div>
+
+<hr class="border border-primary border-3 opacity-75">
 <div>
-  <form action="/insert_game" method="post">
-    <div>
-    <label for="title">Title:</label>
-    <input id="title" name="query_title">
-    <br>
-
-    <label for="setting">Choose your setting:</label>
-    <select id="setting" name="query_setting">
-      <option value="old mansion">old mansion</option>
-      <option value="spaceship">spaceship</option>
-      <option value="art museum">art museum</option>
-      <option value="random">surprise me!</option>
-    </select>
-    </div>
-
-    <div>
-    <label for="difficulty">Choose your difficulty:</label>
-    <select id="difficulty" name="query_difficulty">
-      <option value="easy">easy</option>
-      <option value="medium">medium</option>
-      <option value="hard">hard</option>
-    </select>
-    </div>
-    <input type="submit" value="Investigate!">
-  </form>
-</div>
-
-<hr>
-<div>
+  <h4>My games</h4>
   <div>
     <table class="table">
       <thead>
       <tr>
-        <th scope="col">
-          ID
-        </th>
-
-        <th scope="col">
-          Author
-        </th>
 
         <th scope="col">
           Title
@@ -73,13 +71,6 @@
       <tbody>
       <% @list_of_games.each do |a_game| %>
       <tr>
-        <td>
-          <%= a_game.id %>
-        </td>
-
-        <td>
-          <%= a_game.author_id %>
-        </td>
 
         <td>
           <%= a_game.title %>
@@ -98,7 +89,7 @@
         </td>
 
         <td>
-          <%= Post.where(:game_id => a_game.id).where(:gpt_created => false).count %>
+          <%= Post.where(:game_id => a_game.id).where(:gpt_created => false).count - 2 %>
         </td>
 
         <td>

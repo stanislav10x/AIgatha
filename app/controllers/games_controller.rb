@@ -48,7 +48,7 @@ class GamesController < ApplicationController
       new_post.save
   end
 
-    @list_of_posts = Post.all.where(:game_id => @the_game.id).order({ :created_at => :asc }) # .offset(1) when the time is right
+    @list_of_posts = Post.all.where(:game_id => @the_game.id).order({ :created_at => :asc }).offset(3) # .offset() when the time is right
     render({ :template => "games/show" })
   end
 

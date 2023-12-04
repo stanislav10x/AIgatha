@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def create
     the_post = Post.new
     the_post.game_id = params.fetch("game_id_path")
-    the_post.gpt_created = params.fetch("query_gpt_created", false)
+    the_post.gpt_created = false
     the_post.body = params.fetch("query_body")
 
     if the_post.valid?
