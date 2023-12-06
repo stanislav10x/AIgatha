@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for aigatha on 2023-12-06T18:48:17Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "aigatha"
+primary_region = "iad"
+console_command = "/rails/bin/rails console"
+
+[build]
+
+[deploy]
+  release_command = "./bin/rails db:prepare"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
+
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"
