@@ -14,6 +14,10 @@
           Username
         </th>
 
+        <th scope="col">
+          Best result
+        </th>
+
       </tr>
       </thead>
 
@@ -31,6 +35,14 @@
           <td>
             <%= a_user %>
           </td>
+
+          <td>
+            <% a_user_id = User.where(:username => a_user).first.id %>
+            <% best_game = Game.where(:author_id => a_user_id).where(:status => "solved").order(:number_of_queries => :asc).first %>
+            <%= best_game.number_of_queries%> query(ies)
+            
+          </td>
+
         </tr>
       <% end %>
     </table>

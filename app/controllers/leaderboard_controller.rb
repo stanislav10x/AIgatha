@@ -5,7 +5,7 @@ class LeaderboardController < ApplicationController
 
     completed_games.each do |a_game|
       winning_username = User.where(:id => a_game.author_id).first.username
-      if array_of_winning_users.index(winning_username) == nil
+      if @array_of_winning_users.index(winning_username) == nil
        @array_of_winning_users.push(winning_username)
       end
     end
