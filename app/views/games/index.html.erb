@@ -56,11 +56,15 @@
         </th>
 
         <th scope="col">
-          Created at
+          Number of queries
         </th>
 
         <th scope="col">
-          Number of queries
+          Status
+        </th>
+
+        <th scope="col">
+          Created
         </th>
 
         <th scope="col">
@@ -85,11 +89,15 @@
         </td>
 
         <td>
-          <%= time_ago_in_words(a_game.created_at) %> ago
+          <%= Post.where(:game_id => a_game.id).where(:gpt_created => false).count - 2 %>
         </td>
 
         <td>
-          <%= Post.where(:game_id => a_game.id).where(:gpt_created => false).count - 2 %>
+          <%= a_game.status %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_game.created_at) %> ago
         </td>
 
         <td>
