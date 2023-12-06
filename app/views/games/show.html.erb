@@ -54,9 +54,7 @@
 
 <hr class="border border-primary border-3 opacity-50">
 
-
 <div>
-  <div>
   <dl>
       <% @list_of_posts.each do |a_post| %>
         <div>
@@ -76,31 +74,40 @@
         </div>
         <br><hr>
       <% end %>
+
   </dl>
-  </div>
 </div>
 
-
-<div>
+<% last_post = Post.all.where(:game_id => @the_game.id).order({ :created_at => :asc }).last %>
+<% if last_post.body.end_with?("please come again for new great games!") == false %>
   <div>
-    <h3>
-      What do you want to examine or whom do you want to interrogate?
-    </h3>
+    <div>
+      <h3>
+        What do you want to examine or whom do you want to interrogate?
+      </h3>
 
-    <form action="/<%= @the_game.id %>/insert_post" method="post">
+      <form action="/<%= @the_game.id %>/insert_post" method="post">
 
-      <div>
-        <label for="body_box">
-        </label>
+        <div>
+          <label for="body_box">
+          </label>
 
-        <textarea class="form-control" id="body_box" name="query_body" rows="3"></textarea>
-      </div>
+          <textarea class="form-control" id="body_box" name="query_body" rows="3"></textarea>
+        </div>
 
-      <button type="submit" class="btn btn-primary">
-        Go!
-      </button>
-    </form>
+        <button type="submit" class="btn btn-primary">
+          Go!
+        </button>
+      </form>
+    </div>
   </div>
-</div>
-
+<% elsif last_post.body.end_with?("This case is solved; please come again for new great games") == true %>
+  <div>
+    This case is solved in <%= Post.where(:game_id => @the_game.id).where(:gpt_created => false).count - 2 %> queries.<br><a href="/">Start a new game</a>
+  </div>
+<% else %>
+  <div>
+    Game over. Better luck next time!<br><a href="/">Start a new game</a>
+  </div>
+<% end %>
 <hr>
