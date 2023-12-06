@@ -57,7 +57,7 @@ class GamesController < ApplicationController
     the_game.author_id = current_user.id
     the_game.title = params.fetch("query_title")
 
-    setting_options = ["old mansion", "spaceship", "art museum"]
+    setting_options = ["old mansion", "spaceship", "art museum", "18th century galleon", "underwater metropolis", "neo-noir", "parallel universe", "luxurious island hotel", "AI-run megacity"]
 
     if params.fetch("query_setting") == "random"
       the_game.setting = setting_options.sample()
