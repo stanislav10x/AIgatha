@@ -103,9 +103,10 @@
   </div>
 <% elsif last_post.body.end_with?("This case is solved; please come again for new great games") == true %>
   <% @the_game.status = "solved" %>
+  <% @the_game.number_of_queries = Post.where(:game_id => @the_game.id).where(:gpt_created => false).count - 2 %>
   <% @the_game.save %>
   <div>
-    This case is solved in <%= Post.where(:game_id => @the_game.id).where(:gpt_created => false).count - 2 %> queries.<br><a href="/">Start a new game</a>
+    This case is solved in <%= @the_game.number_of_queries %> queries.<br><a href="/">Start a new game</a>
   </div>
 <% else %>
   <% @the_game.status = "failed" %>

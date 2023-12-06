@@ -1,0 +1,38 @@
+<h2>Leaderboard</h2>
+
+<div>
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+
+        <th scope="col">
+          Place
+        </th>
+
+        <th scope="col">
+          Username
+        </th>
+
+      </tr>
+      </thead>
+
+      <tbody>
+      <% user_place = 0%>
+      <% @array_of_winning_users.take(5).each do |a_user| %>
+        <% user_place = user_place + 1%>
+    
+        <tr>
+
+          <td>
+            <%= user_place %>
+          </td>
+
+          <td>
+            <%= a_user %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

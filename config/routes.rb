@@ -38,4 +38,8 @@ Rails.application.routes.draw do
   #------------------------------
 
   get("/", { :controller => "games", :action => "index" })
+
+  #leaderboard
+
+  get("/leaderboard", {:controller => "leaderboard", :action => "show"})
 end
