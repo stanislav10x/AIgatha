@@ -58,4 +58,4 @@ class PostsController < ApplicationController
 
     redirect_to("/posts", { :notice => "Post deleted successfully."} )
   end
-end
+e
