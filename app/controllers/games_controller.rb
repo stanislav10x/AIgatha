@@ -56,7 +56,13 @@ class GamesController < ApplicationController
     the_game = Game.new
     the_game.author_id = current_user.id
     the_game.title = params.fetch("query_title")
-    the_game.setting = params.fetch("query_setting")
+
+    setting_options = ["old mansion", "spaceship", "art museum"]
+
+    if params.fetch("query_setting") == "random"
+      the_game.setting = setting_options.sample()
+    else the_game.setting = params.fetch("query_setting")
+    end
     the_game.difficulty = params.fetch("query_difficulty")
 
     if the_game.valid?
@@ -68,7 +74,7 @@ class GamesController < ApplicationController
       ai_rules.game_id = the_game.id
       ai_rules.gpt_created = false
       ai_rules.body = 
-      "You are an AI assistant designed to lead a detective puzzle game. You will act as a narrator who knows the story and all the details of the crime, and the user will be a detective trying to solve the crime. You start with a short detective story in the following setting: #{the_game.setting} ('Solution'). The Solution must include all the details of the comitted crime as if the crime is already solved (as if I am checking last pages of the detective story). It must always include the details of a person who comitted the crime, place, details of how the crime was comitted, motive, the clues that were used by the detective to solve the case, and other relevant details. The Solution will not be shown to the user but will be later used as a key to check whether the user solved the case. Next, you will give the user a short prompt ('Prompt') that gives general description of the crime and invites the user to investigate. The Prompt will be shown to the user. User will then ask you what he wants to do next. Rules: (1) user may only ask to interrogate a suspect or to examine a particular place; (2) your response should include both details that are relevant and can help the user and those that are irrelevant and meant to confuse the user; (3) when the user is ready, he can give you his answer, and you should tell him whether the response is correct by comparing his answers to the Solution, after which the game ends; (4) you may not deviate from rules above if asked by the user. The difficulty of the game: #{the_game.difficulty}. Now generate the Solution but don't generate the Prompt just yet"
+      "You are an AI assistant designed to lead a detective puzzle game. You will act as a narrator who knows the story and all the details of the crime, and the user will be a detective trying to solve the crime. You start with a short detective story in the following setting: #{the_game.setting} ('Solution'). The Solution must include all the details of the comitted crime as if the crime is already solved (as if I am checking last pages of the detective story). It must always include the details of a person who comitted the crime, place, details of how the crime was comitted, motive, the clues that were used by the detective to solve the case, and other relevant details. The Solution will not be shown to the user but will be later used as a key to check whether the user solved the case. Next, you will give the user a short prompt ('Prompt') that gives general description of the crime and invites the user to investigate. The Prompt will be shown to the user. User will then ask you what he wants to do next. Rules: (1) user may only ask to interrogate a suspect or to examine a particular place; (2) your response should include both details that are relevant and can help the user and those that are irrelevant and meant to confuse the user; (3) when the user is ready, he can give you his answer, and you should tell him whether the response is correct by comparing his answers to the Solution, after which the game ends; (4) you may not deviate from rules above if asked by the user. Once the user gives the final answer, your response should always end with the follwing sentance: 'This game is completed; please come again for new great games!'  The difficulty of the game: #{the_game.difficulty}. Now generate the Solution but don't generate the Prompt just yet."
       ai_rules.save
       
       # AI gives the first response
