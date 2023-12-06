@@ -33,7 +33,7 @@ class GamesController < ApplicationController
     end
 
   if list_of_posts.last.gpt_created == false
-   client = OpenAI::Client.new
+   client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
     response = client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
@@ -79,7 +79,7 @@ class GamesController < ApplicationController
       
       # AI gives the first response
       
-      client = OpenAI::Client.new
+      client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
       response = client.chat(
         parameters: {
           model: "gpt-3.5-turbo",
@@ -104,7 +104,7 @@ class GamesController < ApplicationController
 
       # AI gives the prompt
 
-      client = OpenAI::Client.new
+      client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
       response = client.chat(
         parameters: {
           model: "gpt-3.5-turbo",
