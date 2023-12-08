@@ -13,4 +13,5 @@
 #  author_id         :integer
 #
 class Game < ApplicationRecord
+  validates(:title, presence: true)
 end
