@@ -10,5 +10,4 @@
 #  game_id     :integer
 #
 class Post < ApplicationRecord
-  #validates :body, length: { maximum: 10000, message: "10000 characthers max"}
 end

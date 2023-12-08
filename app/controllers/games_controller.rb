@@ -36,7 +36,7 @@ class GamesController < ApplicationController
    client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-3.5-turbo-1106",
         messages: api_posts_array,
         temperature: 0.7,
       },
@@ -83,7 +83,7 @@ class GamesController < ApplicationController
       client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
       response = client.chat(
         parameters: {
-          model: "gpt-3.5-turbo",
+          model: "gpt-3.5-turbo-1106",
           messages: [{ role: "user", content: ai_rules.body}],
           temperature: 0.7,
         },
@@ -108,7 +108,7 @@ class GamesController < ApplicationController
       client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
       response = client.chat(
         parameters: {
-          model: "gpt-3.5-turbo",
+          model: "gpt-3.5-turbo-1106",
           messages: [{ role: "user", content: ai_rules.body}, { role: "assistant", content: key_story.body}, { role: "user", content: ask_for_prompt.body}],
           temperature: 0.7,
         },
