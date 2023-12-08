@@ -9,6 +9,7 @@ class GamesController < ApplicationController
   end
 
   def show
+
     the_id = params.fetch("path_id")
 
     matching_games = Game.where({ :id => the_id })
@@ -94,14 +95,21 @@ class GamesController < ApplicationController
         key_story.body = response.fetch("choices").at(0).fetch("message").fetch("content")
         key_story.save
 
+        # Adding cover image for the story 
+        client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_TOKEN"))
+        response = client.images.generate(parameters: { prompt: " Generate an image for the following detective story: #{key_story.body}", size: "256x256" })
+        ai_image_url = response.dig("data", 0, "url")
+        the_game.image = ai_image_url
+        the_game.save
+
       # Ask AI to give the prompt to the user
       
-      ask_for_prompt = Post.new
-      ask_for_prompt.game_id = the_game.id
-      ask_for_prompt.gpt_created = false
-      ask_for_prompt.body = 
-      "Now generate the Prompt (don't include the word 'Prompt' in your answer)"
-      ask_for_prompt.save
+        ask_for_prompt = Post.new
+        ask_for_prompt.game_id = the_game.id
+        ask_for_prompt.gpt_created = false
+        ask_for_prompt.body = 
+        "Now generate the Prompt (don't include the word 'Prompt' in your answer)"
+        ask_for_prompt.save
 
       # AI gives the prompt
 

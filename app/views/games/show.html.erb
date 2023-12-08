@@ -54,6 +54,12 @@
 
 <hr class="border border-primary border-3 opacity-50">
 
+<% if @the_game.image != nil %>
+<div>
+  <img src=<%= @the_game.image %> alt="The cover image to the detective game" class="mx-auto">
+</div>
+<% end %>
+
 <div>
   <dl>
       <% @list_of_posts.each do |a_post| %>

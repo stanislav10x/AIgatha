@@ -4,6 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  difficulty        :string
+#  image             :string
 #  number_of_queries :integer
 #  setting           :string
 #  status            :string
